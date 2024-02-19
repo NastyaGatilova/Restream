@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/registration"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="500sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:background="@drawable/windowregistr"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="236sp"
+            android:layout_height="36sp"
+            android:layout_gravity="center"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="21sp"
+            android:background="@drawable/logorestream" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="320sp"
+            android:layout_height="60sp"
+            android:layout_gravity="center"
+            android:background="@drawable/inputemail"
+            android:ems="10"
+            android:layout_marginTop="25sp"
+            android:inputType="textEmailAddress"
+            android:hint="@string/email"
+            android:textAppearance="@style/HintTextStyle"
+            android:paddingStart="15sp"
+
+            />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="350sp"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            android:layout_gravity="center"
+            app:passwordToggleDrawable="@drawable/eye_selector"
+            app:hintEnabled="false"
+            app:hintAnimationEnabled="false"
+            android:layout_marginTop="8sp"
+            android:id="@+id/eye"
+            app:passwordToggleTint = "@color/purple2"
+
+
+          >
+<!--            app:counterEnabled="true"   может понадобится для счетчика символов-->
+<!--            app:counterMaxLength="5"-->
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEdit"
+                android:layout_width="320sp"
+                android:layout_height="60sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25sp"
+                android:background="@drawable/inputemail"
+                android:ems="10"
+                android:hint="@string/pass"
+                android:inputType="textPassword"
+                android:paddingStart="15sp"
+                android:textAppearance="@style/HintTextStyle"
+
+                android:drawableEnd="@drawable/eye_selector"
+                android:drawablePadding="50dp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/comeInBtn"
+            android:layout_width="320sp"
+            android:layout_height="60sp"
+            android:layout_marginTop="8sp"
+            android:layout_gravity="center"
+            android:background="@drawable/default_button_selector"
+            android:text="@string/come_in"
+            android:textAppearance="@style/come_in"
+            />
+
+
+
+        <TextView
+            android:id="@+id/restoreBtn"
+            android:layout_width="320sp"
+            android:layout_height="60sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8sp"
+            android:background="@drawable/restore_pass_btn"
+            android:gravity="center"
+            android:text="@string/restorePass"
+            android:textAppearance="@style/no_acc_text"
+
+
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:layout_marginTop="8sp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/no_acc_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10sp"
+                android:text="@string/no_acc_text"
+                android:textAppearance="@style/no_acc_text" />
+
+            <TextView
+                android:id="@+id/registrBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register"
+                android:textAppearance="@style/no_acc_text"
+                android:clickable="true"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="-20sp"
+            android:layout_marginBottom="4sp">
+
+            <TextView
+                android:id="@+id/orLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/or_login_social_networks"
+                android:textAppearance="@style/no_acc_text" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="25sp">
+
+
+            <ImageView
+                android:id="@+id/vk"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:background="@drawable/icons"
+                android:src="@drawable/vk"
+                />
+            <ImageView
+                android:id="@+id/twitch"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:background="@drawable/icons"
+                android:layout_marginStart="20sp"
+                android:src="@drawable/twitch"
+                />
+            <ImageView
+                android:id="@+id/google"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:background="@drawable/icons"
+                android:layout_marginStart="20sp"
+                android:src="@drawable/google"
+                android:padding="5sp"
+                />
+            <ImageView
+                android:id="@+id/gg"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:background="@drawable/icons"
+                android:layout_marginStart="20sp"
+                android:src="@drawable/gg"
+                />
+            <ImageView
+                android:id="@+id/telegram"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:background="@drawable/icons"
+                android:layout_marginStart="20sp"
+                android:src="@drawable/telegram"
+                />
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

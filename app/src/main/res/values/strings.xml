@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Restream</string>
+    <string name="email">Электронная почта</string>
+    <string name="pass">Пароль</string>
+    <string name="restorePass">Восстановить пароль</string>
+    <string name="come_in">Войти</string>
+    <string name="no_acc_text">Нет аккаунта?</string>
+    <string name="has_acc_text">Есть аккаунт?</string>
+    <string name="register"><font fgcolor="#B223CA">Зарегистрируйтесь\n</font></string>
+    <string name="login_in_acc"><font fgcolor="#B223CA">Войдите в личный кабинет</font></string>
+    <string name="or_login_social_networks"> или войдите через соцсети:</string>
+    <string name="or_registr_social_networks"> или зарегистрируйтесь через соцсети:</string>
+    <string name="pass_confirmation">Подтверждение пароля</string>
+    <string name="agreement">Я соглашаюсь с условиями</string>
+    <string name="public_offer"><font fgcolor="#B223CA">Публичной Оферты</font></string>
+    <string name="register2"><font fgcolor="#FFFFFF">Зарегистрироваться</font></string>
+
+</resources>
