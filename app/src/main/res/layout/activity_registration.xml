@@ -32,27 +32,30 @@
             android:layout_marginTop="8sp"
             app:hintEnabled="false"
             app:hintAnimationEnabled="false"
-            app:errorEnabled="true"
-            app:errorTextAppearance = "@style/ErrorText"
             >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/email"
-            android:layout_width="320sp"
-            android:layout_height="60sp"
-            android:layout_gravity="center"
-            android:background="@drawable/inputemail"
-            android:ems="10"
-            android:layout_marginTop="25sp"
-            android:inputType="textEmailAddress"
-            android:hint="@string/email"
-            android:textAppearance="@style/HintTextStyle"
-            android:paddingStart="15sp"
-
-
-            />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email"
+                android:layout_width="320sp"
+                android:layout_height="60sp"
+                android:layout_gravity="center"
+                android:background="@drawable/inputemail"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:paddingStart="15sp"
+                android:textAppearance="@style/HintTextStyle" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/erEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/incorrect_email"
+            android:layout_marginStart="35sp"
+            android:layout_gravity="start"
+            android:textAppearance="@style/error_text"
+            android:visibility="gone"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passTextInputLayout"
@@ -63,11 +66,9 @@
             app:passwordToggleDrawable="@drawable/eye_selector"
             app:hintEnabled="false"
             app:hintAnimationEnabled="false"
-            android:layout_marginTop="4sp"
-
             app:passwordToggleTint = "@color/purple2"
-            app:errorEnabled="true"
-            app:errorTextAppearance = "@style/ErrorText"
+            android:layout_marginTop="8sp"
+
 
             >
 
@@ -76,7 +77,6 @@
                 android:layout_width="320sp"
                 android:layout_height="60sp"
                 android:layout_gravity="center"
-                android:layout_marginTop="25sp"
                 android:background="@drawable/inputemail"
                 android:ems="10"
                 android:hint="@string/pass"
@@ -89,15 +89,25 @@
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/erPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/incorrect_pass"
+            android:layout_marginStart="35sp"
+            android:layout_gravity="start"
+            android:textAppearance="@style/error_text"
+            android:visibility="gone"/>
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmPassTextInputLayout"
             android:layout_width="350sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             app:hintEnabled="false"
             app:hintAnimationEnabled="false"
-            android:layout_marginTop="4sp"
+            android:layout_marginTop="8sp"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -105,7 +115,6 @@
                 android:layout_width="320sp"
                 android:layout_height="60sp"
                 android:layout_gravity="center"
-                android:layout_marginTop="25sp"
                 android:background="@drawable/inputemail"
                 android:ems="10"
                 android:hint="@string/pass_confirmation"
@@ -116,6 +125,15 @@
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/erConfPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/incorrect_confirmpass"
+            android:layout_marginStart="35sp"
+            android:layout_gravity="start"
+            android:textAppearance="@style/error_text"
+            android:visibility="gone" />
 
 
 
@@ -123,13 +141,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4sp"
             android:orientation="horizontal"
             android:layout_marginStart="28sp"
             android:layout_gravity="start">
 
             <CheckBox
-                android:id="@+id/checkBoxBold"
+                android:id="@+id/checkBoxOffer"
                 android:layout_width="25sp"
                 android:layout_height="wrap_content"
                 android:button="@drawable/chechbox_public_offer_selector"/>
@@ -249,7 +266,7 @@
                 android:textAppearance="@style/no_acc_text" />
 
             <TextView
-                android:id="@+id/registrBtn"
+                android:id="@+id/loginInAcc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login_in_acc"

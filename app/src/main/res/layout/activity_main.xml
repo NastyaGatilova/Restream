@@ -76,19 +76,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/comeInBtn"
             android:layout_width="320sp"

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/registration"
+    android:gravity="center"
+    tools:context=".MailConfirmationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:background="@drawable/windowregistr"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="236sp"
+            android:layout_height="36sp"
+            android:layout_gravity="center"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="21sp"
+            android:background="@drawable/logorestream" />
+
+
+
+
+        <TextView
+            android:id="@+id/confirmMail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16sp"
+            style="@style/confirm_mailStyle"
+            android:gravity="center"
+            android:text="@string/confirmMail"
+            />
+
+
+
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8sp"
+                android:paddingEnd="10sp"
+                android:paddingStart="30sp"
+                android:text="@string/in_your_email"
+                android:textAppearance="@style/for_confirm_mail" />
+
+            <TextView
+                android:id="@+id/userEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="30sp"
+                android:paddingEnd="25sp"
+                android:textStyle="bold"
+                android:textAppearance="@style/for_confirm_mail" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/letter_sent"
+                android:layout_gravity="center"
+                android:paddingStart="30sp"
+                android:paddingEnd="25sp"
+                android:textAppearance="@style/for_confirm_mail" />
+
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:paddingStart="30sp"
+                android:paddingEnd="25sp"
+            android:text="@string/about_spam"
+                android:layout_gravity="center"
+            android:textAppearance="@style/for_confirm_mail"
+                android:textColor="@color/light_pink"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/comeInBtn"
+            android:layout_width="320sp"
+            android:layout_height="60sp"
+            android:layout_marginTop="30sp"
+            android:layout_gravity="center"
+            android:background="@drawable/default_button_selector"
+            android:text="@string/come_in_acc"
+            android:textAppearance="@style/come_in"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

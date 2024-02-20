@@ -15,4 +15,14 @@
     <string name="public_offer"><font fgcolor="#B223CA">Публичной Оферты</font></string>
     <string name="register2"><font fgcolor="#FFFFFF">Зарегистрироваться</font></string>
 
+    <string name="incorrect_email">Некорректный e-mail</string>
+    <string name="incorrect_pass">В пароле должно быть от 8 символов</string>
+    <string name="incorrect_confirmpass">Пароли должны совпадать</string>
+
+    <string name="confirmMail">Подтверждение почты</string>
+    <string name="about_spam">Если Вы не получили письмо, проверьте папку \"Спам\" или попробуйте еще раз.</string>
+    <string name="come_in_acc">Войти в аккаунт</string>
+    <string name="in_your_email">На вашу почту </string>
+    <string name="letter_sent">было отправлено письмо, с ссылкой для подтверждения аккаунта.</string>
+
 </resources>

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Restream"
         tools:targetApi="31">
         <activity
+            android:name=".MailConfirmationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProbaActivity"
             android:exported="false" />
         <activity

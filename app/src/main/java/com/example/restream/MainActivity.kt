@@ -70,15 +70,18 @@ class MainActivity : AppCompatActivity() {
 
             val intent = Intent(this@MainActivity, RegistrationActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.restoreBtn.setOnClickListener {
             val intent = Intent(this@MainActivity, RestorePassActivity::class.java)
             startActivity(intent)
+            finish()
             }
         binding.comeInBtn.setOnClickListener {
             val intent = Intent(this@MainActivity, ComeInActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
 
