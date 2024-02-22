@@ -4,28 +4,21 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.text.InputType
-import android.text.Selection
-import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
-import android.text.method.HideReturnsTransformationMethod
 import android.text.method.LinkMovementMethod
-import android.text.method.PasswordTransformationMethod
 import android.text.style.ClickableSpan
-import android.view.MotionEvent
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import com.example.restream.databinding.ActivityMainBinding
+import com.example.restream.databinding.ActivityAuthorizationBinding
+import com.example.restream.databinding.ActivityMailConfirmationBinding
 
 
-class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+class AuthorizationActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityAuthorizationBinding
 
     private var isPasswordVisible = false
 
@@ -34,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityAuthorizationBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -68,20 +61,20 @@ class MainActivity : AppCompatActivity() {
                 binding.registrBtn.text = spannableString
                 binding.registrBtn.movementMethod = LinkMovementMethod.getInstance()
 
-            val intent = Intent(this@MainActivity, RegistrationActivity::class.java)
+            val intent = Intent(this@AuthorizationActivity, RegistrationActivity::class.java)
             startActivity(intent)
             finish()
         }
 
         binding.restoreBtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, RestorePassActivity::class.java)
+            val intent = Intent(this@AuthorizationActivity, RestorePassActivity::class.java)
             startActivity(intent)
-            finish()
+
             }
         binding.comeInBtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, ComeInActivity::class.java)
-            startActivity(intent)
-            finish()
+//            val intent = Intent(this@AuthorizationActivity, HomeActivity::class.java)
+//            startActivity(intent)
+//            finish()
         }
 
 

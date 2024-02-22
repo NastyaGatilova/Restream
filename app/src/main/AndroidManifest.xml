@@ -16,22 +16,13 @@
             android:name=".MailConfirmationActivity"
             android:exported="false" />
         <activity
-            android:name=".ProbaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ComeInActivity"
-            android:exported="false" />
-        <activity
             android:name=".RestorePassActivity"
             android:exported="false" />
         <activity
             android:name=".RegistrationActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".AuthorizationActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,287 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/registration"
-    android:gravity="center"
     tools:context=".RegistrationActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="550sp"
-        android:layout_marginStart="10sp"
-        android:layout_marginEnd="10sp"
+        android:layout_height="525dp"
         android:background="@drawable/windowregistr"
-        android:orientation="vertical">
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
         <ImageView
-            android:layout_width="236sp"
-            android:layout_height="36sp"
+            android:id="@+id/imageView2"
+            android:layout_width="236dp"
+            android:layout_height="36dp"
             android:layout_gravity="center"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="21sp"
-            android:background="@drawable/logorestream" />
+            android:layout_marginTop="8dp"
+            android:background="@drawable/logorestream"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailTextInputLayout"
-            android:layout_width="350sp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="8sp"
-            app:hintEnabled="false"
+            android:layout_marginTop="8dp"
             app:hintAnimationEnabled="false"
-            >
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/email"
-                android:layout_width="320sp"
-                android:layout_height="60sp"
+                android:layout_width="320dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:background="@drawable/inputemail"
                 android:ems="10"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:paddingStart="15sp"
-                android:textAppearance="@style/HintTextStyle" />
+                android:paddingStart="15dp"
+                android:textAppearance="@style/HintTextStyle"
+                tools:ignore="RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/erEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
             android:text="@string/incorrect_email"
-            android:layout_marginStart="35sp"
-            android:layout_gravity="start"
             android:textAppearance="@style/error_text"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailTextInputLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passTextInputLayout"
-            android:layout_width="350sp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            app:passwordToggleEnabled="true"
             android:layout_gravity="center"
-            app:passwordToggleDrawable="@drawable/eye_selector"
-            app:hintEnabled="false"
+            android:layout_marginTop="8dp"
             app:hintAnimationEnabled="false"
-            app:passwordToggleTint = "@color/purple2"
-            android:layout_marginTop="8sp"
-
-
-            >
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/erEmail"
+            app:passwordToggleDrawable="@drawable/eye_selector"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/purple2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/pass"
-                android:layout_width="320sp"
-                android:layout_height="60sp"
+                android:layout_width="320dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:background="@drawable/inputemail"
+                android:drawableEnd="@drawable/eye_selector"
                 android:ems="10"
                 android:hint="@string/pass"
                 android:inputType="textPassword"
-                android:paddingStart="15sp"
                 android:textAppearance="@style/HintTextStyle"
-
-                android:drawableEnd="@drawable/eye_selector"
-                android:drawablePadding="50dp"
-                />
-
+                tools:ignore="RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:id="@+id/erPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
             android:text="@string/incorrect_pass"
-            android:layout_marginStart="35sp"
-            android:layout_gravity="start"
             android:textAppearance="@style/error_text"
-            android:visibility="gone"/>
-
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passTextInputLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPassTextInputLayout"
-            android:layout_width="350sp"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            app:hintEnabled="false"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
             app:hintAnimationEnabled="false"
-            android:layout_marginTop="8sp"
-            >
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/erPass">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/confirmPass"
-                android:layout_width="320sp"
-                android:layout_height="60sp"
+                android:layout_width="320dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:background="@drawable/inputemail"
                 android:ems="10"
                 android:hint="@string/pass_confirmation"
                 android:inputType="textPassword"
-                android:paddingStart="15sp"
+                android:paddingStart="15dp"
                 android:textAppearance="@style/HintTextStyle"
-
-                />
-
+                tools:ignore="RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <TextView
             android:id="@+id/erConfPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
             android:text="@string/incorrect_confirmpass"
-            android:layout_marginStart="35sp"
-            android:layout_gravity="start"
             android:textAppearance="@style/error_text"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPassTextInputLayout" />
+
+        <CheckBox
+            android:id="@+id/checkBoxOffer"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="8dp"
+            android:button="@drawable/chechbox_public_offer_selector"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/erConfPass" />
 
 
-
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/agreement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginStart="28sp"
-            android:layout_gravity="start">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/agreement"
+            android:textAppearance="@style/no_acc_text"
+            app:layout_constraintStart_toEndOf="@+id/checkBoxOffer"
+            app:layout_constraintTop_toBottomOf="@+id/erConfPass" />
 
-            <CheckBox
-                android:id="@+id/checkBoxOffer"
-                android:layout_width="25sp"
-                android:layout_height="wrap_content"
-                android:button="@drawable/chechbox_public_offer_selector"/>
-
-            <TextView
-                android:id="@+id/agreement"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="10sp"
-                android:text="@string/agreement"
-                android:textAppearance="@style/no_acc_text" />
-
-        </LinearLayout>
         <TextView
             android:id="@+id/publicOffer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="54sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
             android:text="@string/public_offer"
             android:textAppearance="@style/no_acc_text"
-            android:layout_marginTop="-8sp"
-            android:paddingStart="10sp"/>
-
+            app:layout_constraintStart_toEndOf="@+id/checkBoxOffer"
+            app:layout_constraintTop_toBottomOf="@+id/agreement"
+            tools:ignore="RtlSymmetry" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/registerbtn"
-            android:layout_width="320sp"
-            android:layout_height="40sp"
-            android:layout_gravity="center"
-            android:layout_marginTop="8sp"
+            android:layout_width="320dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
             android:background="@drawable/default_button_selector"
             android:text="@string/register2"
-            android:textAppearance="@style/registr_btn" />
+            android:textAppearance="@style/registr_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/publicOffer" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/no_acc_text"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/or_registr_social_networks"
+            android:textAppearance="@style/no_acc_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registerbtn" />
+
+        <ImageView
+            android:id="@+id/vk"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icons"
+            android:src="@drawable/vk"
+            app:layout_constraintEnd_toStartOf="@+id/twitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/no_acc_text" />
+
+        <ImageView
+            android:id="@+id/twitch"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icons"
+            android:src="@drawable/twitch"
+            app:layout_constraintEnd_toStartOf="@+id/google"
+            app:layout_constraintStart_toEndOf="@+id/vk"
+            app:layout_constraintTop_toBottomOf="@+id/no_acc_text" />
+
+        <ImageView
+            android:id="@+id/google"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icons"
+            android:padding="5dp"
+            android:src="@drawable/google"
+            app:layout_constraintEnd_toStartOf="@+id/gg"
+            app:layout_constraintStart_toEndOf="@+id/twitch"
+            app:layout_constraintTop_toBottomOf="@+id/no_acc_text" />
+
+        <ImageView
+            android:id="@+id/gg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icons"
+            android:src="@drawable/gg"
+            app:layout_constraintEnd_toStartOf="@+id/telegram"
+            app:layout_constraintStart_toEndOf="@+id/google"
+            app:layout_constraintTop_toBottomOf="@+id/no_acc_text" />
+
+        <ImageView
+            android:id="@+id/telegram"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/icons"
+            android:src="@drawable/telegram"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gg"
+            app:layout_constraintTop_toBottomOf="@+id/no_acc_text" />
+
+        <TextView
+            android:id="@+id/loginInAcc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8sp"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="50dp"
+            android:clickable="true"
+            android:text="@string/login_in_acc"
+            android:textAppearance="@style/no_acc_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gg" />
 
-            <TextView
-                android:id="@+id/no_acc_text"
-                android:layout_width="320sp"
-                android:gravity="center"
-                android:layout_height="wrap_content"
-                android:text="@string/or_registr_social_networks"
-                android:textAppearance="@style/no_acc_text" />
-        </LinearLayout>
-
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/has_acc_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_marginBottom="25sp"
-            android:layout_marginTop="10sp">
-
-            <ImageView
-                android:id="@+id/vk"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:background="@drawable/icons"
-                android:src="@drawable/vk"
-                />
-            <ImageView
-                android:id="@+id/twitch"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:background="@drawable/icons"
-                android:layout_marginStart="20sp"
-                android:src="@drawable/twitch"
-                />
-            <ImageView
-                android:id="@+id/google"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:background="@drawable/icons"
-                android:layout_marginStart="20sp"
-                android:src="@drawable/google"
-                android:padding="5sp"
-                />
-            <ImageView
-                android:id="@+id/gg"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:background="@drawable/icons"
-                android:layout_marginStart="20sp"
-                android:src="@drawable/gg"
-                />
-            <ImageView
-                android:id="@+id/telegram"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:background="@drawable/icons"
-                android:layout_marginStart="20sp"
-                android:src="@drawable/telegram"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="320sp"
-            android:layout_height="50sp"
-            android:layout_marginTop="-25sp"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/has_acc_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="5sp"
-                android:text="@string/has_acc_text"
-                android:textAppearance="@style/no_acc_text" />
-
-            <TextView
-                android:id="@+id/loginInAcc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_in_acc"
-                android:textAppearance="@style/no_acc_text"
-                android:clickable="true"/>
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/has_acc_text"
+            android:textAppearance="@style/no_acc_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vk" />
 
 
-
-        </LinearLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

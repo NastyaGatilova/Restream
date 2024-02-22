@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/registration"
+    android:gravity="center"
+    tools:context=".AuthorizationActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/windowregistr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="236dp"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/logorestream"
+            app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/inputemail"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:paddingStart="15dp"
+            android:textAppearance="@style/HintTextStyle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.188"
+            tools:ignore="RtlSymmetry" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/eye"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            app:hintAnimationEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+            app:passwordToggleDrawable="@drawable/eye_selector"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/purple2">
+            <!--            app:counterEnabled="true"   может понадобится для счетчика символов-->
+            <!--            app:counterMaxLength="5"-->
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEdit"
+                android:layout_width="320dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/inputemail"
+                android:drawableEnd="@drawable/eye_selector"
+                android:drawablePadding="50dp"
+                android:ems="10"
+                android:hint="@string/pass"
+                android:inputType="textPassword"
+                android:paddingStart="15dp"
+                android:textAppearance="@style/HintTextStyle"
+                tools:ignore="RtlSymmetry" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/comeInBtn"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/default_button_selector"
+            android:text="@string/come_in"
+            android:textAppearance="@style/come_in"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eye" />
+
+
+        <TextView
+            android:id="@+id/restoreBtn"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/restore_pass_btn"
+            android:gravity="center"
+            android:text="@string/restorePass"
+            android:textAppearance="@style/no_acc_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comeInBtn" />
+
+        <TextView
+            android:id="@+id/no_acc_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="8dp"
+            android:paddingEnd="10dp"
+            android:text="@string/no_acc_text"
+            android:textAppearance="@style/no_acc_text"
+            app:layout_constraintEnd_toStartOf="@+id/registrBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/restoreBtn" />
+
+
+        <TextView
+            android:id="@+id/registrBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="80dp"
+            android:clickable="true"
+            android:text="@string/register"
+            android:textAppearance="@style/no_acc_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/no_acc_text"
+            app:layout_constraintTop_toBottomOf="@+id/restoreBtn" />
+
+        <TextView
+            android:id="@+id/orLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:text="@string/or_login_social_networks"
+            android:textAppearance="@style/no_acc_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/registrBtn" />
+
+        <ImageView
+            android:id="@+id/vk"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icons"
+            android:src="@drawable/vk"
+            app:layout_constraintEnd_toStartOf="@+id/twitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orLogin" />
+
+        <ImageView
+            android:id="@+id/twitch"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icons"
+            android:src="@drawable/twitch"
+            app:layout_constraintEnd_toStartOf="@+id/google"
+            app:layout_constraintStart_toEndOf="@+id/vk"
+            app:layout_constraintTop_toBottomOf="@+id/orLogin" />
+
+        <ImageView
+            android:id="@+id/google"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icons"
+            android:padding="5dp"
+            android:src="@drawable/google"
+            app:layout_constraintEnd_toStartOf="@+id/gg"
+            app:layout_constraintStart_toEndOf="@+id/twitch"
+            app:layout_constraintTop_toBottomOf="@+id/orLogin" />
+
+        <ImageView
+            android:id="@+id/gg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/icons"
+            android:src="@drawable/gg"
+            app:layout_constraintEnd_toStartOf="@+id/telegram"
+            app:layout_constraintStart_toEndOf="@+id/google"
+            app:layout_constraintTop_toBottomOf="@+id/orLogin" />
+
+        <ImageView
+            android:id="@+id/telegram"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="45dp"
+            android:background="@drawable/icons"
+            android:src="@drawable/telegram"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gg"
+            app:layout_constraintTop_toBottomOf="@+id/orLogin" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

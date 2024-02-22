@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.restream.databinding.ActivityMailConfirmationBinding
-import com.example.restream.databinding.ActivityRegistrationBinding
 
 class MailConfirmationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMailConfirmationBinding
@@ -18,7 +17,7 @@ class MailConfirmationActivity : AppCompatActivity() {
 
         binding.comeInBtn.setOnClickListener {
             val intent =
-                Intent(this@MailConfirmationActivity, MainActivity::class.java)
+                Intent(this@MailConfirmationActivity, AuthorizationActivity::class.java)
             startActivity(intent)
         }
 

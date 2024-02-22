@@ -12,7 +12,6 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.restream.databinding.ActivityRegistrationBinding
 const val TAG = "--Help--"
@@ -82,7 +81,7 @@ class RegistrationActivity : AppCompatActivity() {
             binding.loginInAcc.text = spannableString
             binding.loginInAcc.movementMethod = LinkMovementMethod.getInstance()
 
-            val intent = Intent(this@RegistrationActivity, MainActivity::class.java)
+            val intent = Intent(this@RegistrationActivity, AuthorizationActivity::class.java)
             startActivity(intent)
             finish()
         }
