@@ -2,6 +2,7 @@ package com.example.restream
 
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
@@ -38,32 +39,12 @@ class AuthorizationActivity : AppCompatActivity() {
 
 
         binding.registrBtn.setOnClickListener {
-                val spannableString = SpannableString(binding.registrBtn.text)
 
-                val clickableSpan = object : ClickableSpan() {
-                    override fun onClick(widget: View) {
-                        binding.registrBtn.setTypeface(null, Typeface.BOLD)
-
-                    }
-
-                    override fun updateDrawState(ds: TextPaint) {
-                        super.updateDrawState(ds)
-                        ds.isFakeBoldText = true
-                    }
-                }
-
-                spannableString.setSpan(
-                    clickableSpan,
-                    0,
-                    binding.registrBtn.text.length,
-                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                binding.registrBtn.text = spannableString
-                binding.registrBtn.movementMethod = LinkMovementMethod.getInstance()
+            binding.registrBtn.paintFlags = binding.registrBtn.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
             val intent = Intent(this@AuthorizationActivity, RegistrationActivity::class.java)
             startActivity(intent)
-            finish()
+
         }
 
         binding.restoreBtn.setOnClickListener {

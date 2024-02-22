@@ -1,6 +1,7 @@
 package com.example.restream
 
 import android.content.Intent
+import android.graphics.Paint
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
@@ -58,32 +59,11 @@ class RegistrationActivity : AppCompatActivity() {
 
 
         binding.loginInAcc.setOnClickListener {
-            val spannableString = SpannableString(binding.loginInAcc.text)
-
-            val clickableSpan = object : ClickableSpan() {
-                override fun onClick(widget: View) {
-                    binding.loginInAcc.setTypeface(null, Typeface.BOLD)
-
-                }
-
-                override fun updateDrawState(ds: TextPaint) {
-                    super.updateDrawState(ds)
-                    ds.isFakeBoldText = true
-                }
-            }
-
-            spannableString.setSpan(
-                clickableSpan,
-                0,
-                binding.loginInAcc.text.length,
-                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-            binding.loginInAcc.text = spannableString
-            binding.loginInAcc.movementMethod = LinkMovementMethod.getInstance()
+            binding.loginInAcc.paintFlags = binding.loginInAcc.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
             val intent = Intent(this@RegistrationActivity, AuthorizationActivity::class.java)
             startActivity(intent)
-            finish()
+//            finish()
         }
 
 
