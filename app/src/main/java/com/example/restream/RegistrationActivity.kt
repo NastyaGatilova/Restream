@@ -14,7 +14,14 @@ import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.restream.databinding.ActivityRegistrationBinding
+import com.example.restream.retrofit.ApiService
+import com.example.restream.retrofit.SignInRequest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 const val TAG = "--Help--"
 const val TAG_USER_EMAIL = "useremail"
 
@@ -24,6 +31,9 @@ class RegistrationActivity : AppCompatActivity() {
     private  var isValidConfirmPass = false
     private  var isValidEmail = false
     private  var checkBoxFlag = false
+
+    private lateinit var apiService: ApiService
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
@@ -33,28 +43,64 @@ class RegistrationActivity : AppCompatActivity() {
         checkFormRegistration()
 
 
-
         binding.checkBoxOffer.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxFlag = true
             } else {
                 checkBoxFlag = false
+
             }
         }
 
+
+
+
+
+
+
         binding.registerbtn.setOnClickListener{
+//            Log.d(TAG, "checkBoxFlag = $checkBoxFlag")
+            if ( (checkBoxFlag == false) )
+                //&& (binding.pass.text!!.isEmpty())&& (binding.confirmPass.text!!.isEmpty()) && (binding.email.text!!.isEmpty()))
+                {
+                binding.erPass.visibility = View.VISIBLE
+                binding.erConfPass.visibility = View.VISIBLE
+                binding.erEmail.visibility = View.VISIBLE
+            }
 
             if (checkBoxFlag) {
                 if (checkAllFormRegistartion()) {
-                    val intent =
-                        Intent(this@RegistrationActivity, MailConfirmationActivity::class.java)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        try {
+                            apiService.registrUser(
+                                SignInRequest(
+                                    binding.email.text.toString(),
+                                    binding.pass.text.toString(),
+                                    binding.confirmPass.text.toString()
+                                )
+                            )
+                            Log.d(TAG, "Успешно")
+                        }
+                        catch (e: Exception) {
 
-                    intent.putExtra(TAG_USER_EMAIL, binding.email.text.toString())
-                    startActivity(intent)
+                            Log.d(TAG, "Ошибка запроса!!!!")
+
+
+                        }
+                    }
+
+
+//                    val intent =
+//                        Intent(this@RegistrationActivity, MailConfirmationActivity::class.java)
+//
+//                    intent.putExtra(TAG_USER_EMAIL, binding.email.text.toString())
+//                    startActivity(intent)
 
                 }
 
-            }
+                }
+
+
         }
 
 
@@ -115,7 +161,7 @@ private fun checkAllFormRegistartion():Boolean{
                     isValidPass = true
                     binding.erPass.visibility = View.GONE
                 }
-                Log.d(TAG, "Pass param= $isValidPass")
+//                Log.d(TAG, "Pass param= $isValidPass")
             }
 
         })
@@ -140,7 +186,7 @@ private fun checkAllFormRegistartion():Boolean{
                     isValidEmail = true
                     binding.erEmail.visibility = View.GONE
                 }
-                Log.d(TAG, "Email param= $isValidEmail")
+//                Log.d(TAG, "Email param= $isValidEmail")
             }
         })
 
@@ -164,7 +210,7 @@ private fun checkAllFormRegistartion():Boolean{
                     binding.erConfPass.visibility = View.GONE
                     isValidConfirmPass = true
                 }
-                Log.d(TAG, "Confirm pass param= $isValidConfirmPass")
+//                Log.d(TAG, "Confirm pass param= $isValidConfirmPass")
             }
         })
 
