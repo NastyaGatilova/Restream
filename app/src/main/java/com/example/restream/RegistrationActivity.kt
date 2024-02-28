@@ -2,25 +2,25 @@ package com.example.restream
 
 import android.content.Intent
 import android.graphics.Paint
-import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Editable
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.TextPaint
 import android.text.TextWatcher
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.example.restream.databinding.ActivityRegistrationBinding
 import com.example.restream.retrofit.ApiService
-import com.example.restream.retrofit.SignInRequest
+import com.example.restream.retrofit.PostData
+import com.example.restream.retrofit.User
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 const val TAG = "--Help--"
 const val TAG_USER_EMAIL = "useremail"
@@ -32,13 +32,37 @@ class RegistrationActivity : AppCompatActivity() {
     private  var isValidEmail = false
     private  var checkBoxFlag = false
 
-    private lateinit var apiService: ApiService
+    val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+        override fun log(message: String) {
+            Log.d(TAG, "SERVER_RESPONSE ${message}") // Устанавливаем тег для логирования ответов сервера
+        }
+    }).apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+
+    val client = OkHttpClient.Builder()
+        .addInterceptor(loggingInterceptor)
+        .build()
+
+    val moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
+    val converterFactory = MoshiConverterFactory.create(moshi)
+    val retrofit = Retrofit.Builder()
+        .baseUrl("https://app.restream.su/")
+        .client(client)
+        .addConverterFactory(converterFactory)
+        .build()
+    val service = retrofit.create(ApiService::class.java)
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
 
         checkFormRegistration()
 
@@ -70,23 +94,35 @@ class RegistrationActivity : AppCompatActivity() {
 
             if (checkBoxFlag) {
                 if (checkAllFormRegistartion()) {
+
+                    val user = User(
+                        binding.email.text.toString(),
+                        binding.pass.text.toString(),
+                        binding.confirmPass.text.toString()
+                    )
+                    val postData = PostData(user, null, null)
+
+                    Log.d(TAG, "User email=${binding.email.text.toString()}  pass=${binding.pass.text.toString()} confirmPass=${binding.confirmPass.text.toString()}")
+
                     CoroutineScope(Dispatchers.IO).launch {
                         try {
-                            apiService.registrUser(
-                                SignInRequest(
-                                    binding.email.text.toString(),
-                                    binding.pass.text.toString(),
-                                    binding.confirmPass.text.toString()
-                                )
-                            )
-                            Log.d(TAG, "Успешно")
+                             val response  = service.registrUser(postData)
+
+                            val statusCode = response.code()
+                            if (response.isSuccessful) {
+                                Log.d(TAG, "Успешно statusCode=${statusCode} ")
+                            } else {
+                                Log.d(TAG, "Не успешно statusCode=${statusCode} ")
+                            }
+//                            runOnUiThread { Log.d(TAG, "USER=${bodyUser..user.toString()}") }
                         }
                         catch (e: Exception) {
 
-                            Log.d(TAG, "Ошибка запроса!!!!")
+                            Log.d(TAG, "Ошибка запроса!!!! ${e.printStackTrace()}")
 
 
                         }
+
                     }
 
 
