@@ -24,9 +24,10 @@
     <string name="come_in_acc">Войти в аккаунт</string>
     <string name="in_your_email">На вашу почту </string>
     <string name="letter_sent">было отправлено письмо, с ссылкой для подтверждения аккаунта.</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
+    <string name="error">Упс! Ошибка! Попробуйте снова…</string>
+    <string name="wait">Подождите…</string>
+    <string name="user_exists">Учётная запись с таким email уже существует</string>
+
 
 </resources>

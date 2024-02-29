@@ -7,7 +7,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.restream.databinding.ActivityRegistrationBinding
 import com.example.restream.retrofit.ApiService
 import com.example.restream.retrofit.PostData
@@ -32,28 +35,9 @@ class RegistrationActivity : AppCompatActivity() {
     private  var isValidEmail = false
     private  var checkBoxFlag = false
 
-    val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-        override fun log(message: String) {
-            Log.d(TAG, "SERVER_RESPONSE ${message}") // Устанавливаем тег для логирования ответов сервера
-        }
-    }).apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
+    val viewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java)}
 
-    val client = OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
-        .build()
 
-    val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
-    val converterFactory = MoshiConverterFactory.create(moshi)
-    val retrofit = Retrofit.Builder()
-        .baseUrl("https://app.restream.su/")
-        .client(client)
-        .addConverterFactory(converterFactory)
-        .build()
-    val service = retrofit.create(ApiService::class.java)
 
 
 
@@ -76,12 +60,6 @@ class RegistrationActivity : AppCompatActivity() {
             }
         }
 
-
-
-
-
-
-
         binding.registerbtn.setOnClickListener{
 //            Log.d(TAG, "checkBoxFlag = $checkBoxFlag")
             if ( (checkBoxFlag == false) )
@@ -94,50 +72,40 @@ class RegistrationActivity : AppCompatActivity() {
 
             if (checkBoxFlag) {
                 if (checkAllFormRegistartion()) {
-
-                    val user = User(
-                        binding.email.text.toString(),
-                        binding.pass.text.toString(),
-                        binding.confirmPass.text.toString()
-                    )
-                    val postData = PostData(user, null, null)
-
-                    Log.d(TAG, "User email=${binding.email.text.toString()}  pass=${binding.pass.text.toString()} confirmPass=${binding.confirmPass.text.toString()}")
-
-                    CoroutineScope(Dispatchers.IO).launch {
-                        try {
-                             val response  = service.registrUser(postData)
-
-                            val statusCode = response.code()
-                            if (response.isSuccessful) {
-                                Log.d(TAG, "Успешно statusCode=${statusCode} ")
-                            } else {
-                                Log.d(TAG, "Не успешно statusCode=${statusCode} ")
-                            }
-//                            runOnUiThread { Log.d(TAG, "USER=${bodyUser..user.toString()}") }
-                        }
-                        catch (e: Exception) {
-
-                            Log.d(TAG, "Ошибка запроса!!!! ${e.printStackTrace()}")
+                    //надо передать заполненные поля email,pass,confirmPass в MainViewModel
+                        viewModel.registrUserRequest(binding)
 
 
-                        }
+
+                        viewModel.response.observe(this, Observer { response ->
+                                if(response == 422)  Toast.makeText(this@RegistrationActivity, R.string.user_exists, Toast.LENGTH_SHORT).show()
+
+                                else if (response == 201){
+
+                                    val intent = Intent(this@RegistrationActivity, MailConfirmationActivity::class.java)
+                                    intent.putExtra(TAG_USER_EMAIL, binding.email.text.toString())
+                                    startActivity(intent)
+
+                                }
+                                else {
+                                    val intent =
+                                        Intent(this@RegistrationActivity, ErrorActivity::class.java)
+                                    startActivity(intent)
+                                }
+
+
+                        })
+
 
                     }
 
 
-//                    val intent =
-//                        Intent(this@RegistrationActivity, MailConfirmationActivity::class.java)
-//
-//                    intent.putExtra(TAG_USER_EMAIL, binding.email.text.toString())
-//                    startActivity(intent)
-
                 }
 
                 }
 
 
-        }
+
 
 
         binding.loginInAcc.setOnClickListener {
@@ -148,17 +116,12 @@ class RegistrationActivity : AppCompatActivity() {
 //            finish()
         }
 
-
-
-
-
-
-
-
         }
 
-
-
+    override fun onResume() {
+        super.onResume()
+        binding.registerbtn.setText(R.string.register2)
+    }
 
 
 private fun checkAllFormRegistartion():Boolean{
@@ -197,7 +160,6 @@ private fun checkAllFormRegistartion():Boolean{
                     isValidPass = true
                     binding.erPass.visibility = View.GONE
                 }
-//                Log.d(TAG, "Pass param= $isValidPass")
             }
 
         })
@@ -222,7 +184,7 @@ private fun checkAllFormRegistartion():Boolean{
                     isValidEmail = true
                     binding.erEmail.visibility = View.GONE
                 }
-//                Log.d(TAG, "Email param= $isValidEmail")
+
             }
         })
 
@@ -246,7 +208,6 @@ private fun checkAllFormRegistartion():Boolean{
                     binding.erConfPass.visibility = View.GONE
                     isValidConfirmPass = true
                 }
-//                Log.d(TAG, "Confirm pass param= $isValidConfirmPass")
             }
         })
 
