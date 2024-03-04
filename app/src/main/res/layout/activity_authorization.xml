@@ -126,22 +126,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/erPass" />
 
+        <TextView
+            android:id="@+id/erRequest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="2dp"
+            android:text="@string/wrong_email_or_pass"
+            android:textAppearance="@style/error_text"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comeInBtn" />
+
 
         <TextView
             android:id="@+id/restoreBtn"
             android:layout_width="320dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/restore_pass_btn"
+            android:clickable="true"
             android:gravity="center"
             android:text="@string/restorePass"
             android:textAppearance="@style/no_acc_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/comeInBtn"
-            android:clickable="true"/>
+            app:layout_constraintTop_toBottomOf="@+id/erRequest" />
 
         <TextView
             android:id="@+id/no_acc_text"

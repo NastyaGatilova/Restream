@@ -70,7 +70,7 @@ class AuthorizationActivity : AppCompatActivity() {
 
                 }
                 else if (response == 401){
-                    Toast.makeText(this, R.string.wrong_email_or_pass, Toast.LENGTH_SHORT).show()
+                    binding.erRequest.visibility=View.VISIBLE
                 }
                 else {
                     val intent = Intent(this, ErrorActivity::class.java)
@@ -125,6 +125,7 @@ class AuthorizationActivity : AppCompatActivity() {
         binding.registrBtn.setTextColor(Color.parseColor("#B223CA"))
         binding.registrBtn.text = originalText
         binding.registrBtn.paintFlags =  binding.registrBtn.paintFlags and Paint.UNDERLINE_TEXT_FLAG.inv()
+        binding.erRequest.visibility=View.GONE
 
 
     }

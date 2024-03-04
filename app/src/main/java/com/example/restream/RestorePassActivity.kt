@@ -51,7 +51,7 @@ class RestorePassActivity : AppCompatActivity() {
                         binding.erEmail.visibility=View.GONE
                     }
                 } }
-
+            finish()
         }
 
         binding.backBtn.setOnClickListener{
