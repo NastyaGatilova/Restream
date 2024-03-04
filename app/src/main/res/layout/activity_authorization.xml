@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="520dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="5dp"
@@ -18,8 +18,10 @@
         android:background="@drawable/windowregistr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.492"
         tools:ignore="MissingConstraints">
 
         <ImageView
@@ -29,13 +31,13 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:background="@drawable/logorestream"
-            app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
+            app:layout_constraintBottom_toTopOf="@+id/email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editTextEmail"
+            android:id="@+id/email"
             android:layout_width="320dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
@@ -53,18 +55,29 @@
             app:layout_constraintVertical_bias="0.188"
             tools:ignore="RtlSymmetry" />
 
+        <TextView
+            android:id="@+id/erEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="@string/incorrect_email"
+            android:textAppearance="@style/error_text"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/eye"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginTop="8dp"
             app:hintAnimationEnabled="false"
             app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+            app:layout_constraintTop_toBottomOf="@+id/erEmail"
             app:passwordToggleDrawable="@drawable/eye_selector"
             app:passwordToggleEnabled="true"
             app:passwordToggleTint="@color/purple2">
@@ -72,7 +85,7 @@
             <!--            app:counterMaxLength="5"-->
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passwordEdit"
+                android:id="@+id/pass"
                 android:layout_width="320dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
@@ -87,20 +100,31 @@
                 android:textAppearance="@style/HintTextStyle"
                 tools:ignore="RtlSymmetry" />
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/erPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="@string/incorrect_pass2"
+            android:textAppearance="@style/error_text"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eye" />
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/comeInBtn"
             android:layout_width="320dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/default_button_selector"
             android:text="@string/come_in"
             android:textAppearance="@style/come_in"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/eye" />
+            app:layout_constraintTop_toBottomOf="@+id/erPass" />
 
 
         <TextView
@@ -116,7 +140,8 @@
             android:textAppearance="@style/no_acc_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/comeInBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/comeInBtn"
+            android:clickable="true"/>
 
         <TextView
             android:id="@+id/no_acc_text"

@@ -3,6 +3,9 @@
     <string name="email">Электронная почта</string>
     <string name="pass">Пароль</string>
     <string name="restorePass">Восстановить пароль</string>
+    <string name="restorePass2">Восстановить</string>
+    <string name="back">Назад</string>
+
     <string name="come_in">Войти</string>
     <string name="no_acc_text">Нет аккаунта?</string>
     <string name="has_acc_text">Есть аккаунт?</string>
@@ -18,6 +21,8 @@
     <string name="incorrect_email">Некорректный e-mail</string>
     <string name="incorrect_pass">В пароле должно быть от 8 символов</string>
     <string name="incorrect_confirmpass">Пароли должны совпадать</string>
+    <string name="incorrect_pass2">Некорректный пароль</string>
+
 
     <string name="confirmMail">Подтверждение почты</string>
     <string name="about_spam">Если Вы не получили письмо, проверьте папку \"Спам\" или попробуйте еще раз.</string>
@@ -28,6 +33,18 @@
     <string name="error">Упс! Ошибка! Попробуйте снова…</string>
     <string name="wait">Подождите…</string>
     <string name="user_exists">Учётная запись с таким email уже существует</string>
+
+    <string name="input_your_email">Введите email, который вы использовали при регистрации</string>
+
+    <string name="instructions_sent">Инструкции по восстановлению пароля были отправлены на указанную почту</string>
+
+    <string name="wrong_email_or_pass">Неверный Email или пароль.</string>
+
+
+
+
+
+
 
 
 </resources>

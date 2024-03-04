@@ -1,5 +1,7 @@
 package com.example.restream.retrofit
 
+import com.squareup.moshi.Json
+
 data class ErrorResponse(
-    val errors: String
+    @Json(name = "error") val error: String?=null
 )

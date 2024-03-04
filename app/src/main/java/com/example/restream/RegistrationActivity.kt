@@ -1,7 +1,9 @@
 package com.example.restream
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,21 +14,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.restream.databinding.ActivityRegistrationBinding
-import com.example.restream.retrofit.ApiService
-import com.example.restream.retrofit.PostData
-import com.example.restream.retrofit.User
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import com.example.restream.viewmodel.MainViewModel
 
 const val TAG = "--Help--"
 const val TAG_USER_EMAIL = "useremail"
+const val TAG_USER_DATE = "userdate"
+const val TAG_USER_TARIFF = "usertariff"
+
+const val URL_PUBLIC_OFFER= "https://restream.su/offer"
+
 
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegistrationBinding
@@ -35,10 +31,11 @@ class RegistrationActivity : AppCompatActivity() {
     private  var isValidEmail = false
     private  var checkBoxFlag = false
 
+
     val viewModel by lazy { ViewModelProvider(this).get(MainViewModel::class.java)}
 
 
-
+        //val initialPaintFlags = binding.publicOffer.paintFlags
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +48,8 @@ class RegistrationActivity : AppCompatActivity() {
         checkFormRegistration()
 
 
+
+
         binding.checkBoxOffer.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 checkBoxFlag = true
@@ -61,10 +60,8 @@ class RegistrationActivity : AppCompatActivity() {
         }
 
         binding.registerbtn.setOnClickListener{
-//            Log.d(TAG, "checkBoxFlag = $checkBoxFlag")
             if ( (checkBoxFlag == false) )
-                //&& (binding.pass.text!!.isEmpty())&& (binding.confirmPass.text!!.isEmpty()) && (binding.email.text!!.isEmpty()))
-                {
+            {
                 binding.erPass.visibility = View.VISIBLE
                 binding.erConfPass.visibility = View.VISIBLE
                 binding.erEmail.visibility = View.VISIBLE
@@ -72,37 +69,40 @@ class RegistrationActivity : AppCompatActivity() {
 
             if (checkBoxFlag) {
                 if (checkAllFormRegistartion()) {
-                    //надо передать заполненные поля email,pass,confirmPass в MainViewModel
-                        viewModel.registrUserRequest(binding)
+                    viewModel.registrUserRequest(binding)
+
+                    viewModel.response.observe(this, Observer { response ->
+                        if(response == 422)  Toast.makeText(this@RegistrationActivity, R.string.user_exists, Toast.LENGTH_SHORT).show()
+
+                        else if (response == 201){
+
+                            val intent = Intent(this@RegistrationActivity, MailConfirmationActivity::class.java)
+                            intent.putExtra(TAG_USER_EMAIL, binding.email.text.toString())
+                            startActivity(intent)
+
+                        }
+                        else {
+                            val intent =
+                                Intent(this@RegistrationActivity, ErrorActivity::class.java)
+                            startActivity(intent)
+                        }
 
 
-
-                        viewModel.response.observe(this, Observer { response ->
-                                if(response == 422)  Toast.makeText(this@RegistrationActivity, R.string.user_exists, Toast.LENGTH_SHORT).show()
-
-                                else if (response == 201){
-
-                                    val intent = Intent(this@RegistrationActivity, MailConfirmationActivity::class.java)
-                                    intent.putExtra(TAG_USER_EMAIL, binding.email.text.toString())
-                                    startActivity(intent)
-
-                                }
-                                else {
-                                    val intent =
-                                        Intent(this@RegistrationActivity, ErrorActivity::class.java)
-                                    startActivity(intent)
-                                }
-
-
-                        })
-
-
-                    }
+                    })
 
 
                 }
 
-                }
+
+            }
+
+        }
+
+        binding.publicOffer.setOnClickListener {
+            binding.publicOffer.paintFlags = binding.publicOffer.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(URL_PUBLIC_OFFER))
+            startActivity(browserIntent)
+        }
 
 
 
@@ -113,7 +113,7 @@ class RegistrationActivity : AppCompatActivity() {
 
             val intent = Intent(this@RegistrationActivity, AuthorizationActivity::class.java)
             startActivity(intent)
-//            finish()
+            finish()
         }
 
         }
@@ -121,7 +121,11 @@ class RegistrationActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         binding.registerbtn.setText(R.string.register2)
+        binding.publicOffer.paintFlags =  binding.publicOffer.paintFlags and Paint.UNDERLINE_TEXT_FLAG.inv()
+        binding.loginInAcc.paintFlags =  binding.loginInAcc.paintFlags and Paint.UNDERLINE_TEXT_FLAG.inv()
+
     }
+
 
 
 private fun checkAllFormRegistartion():Boolean{
@@ -176,7 +180,6 @@ private fun checkAllFormRegistartion():Boolean{
             override fun afterTextChanged(s: Editable) {
                 val email = s.toString()
                 if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    // Введенный текст является недопустимым email-адресом
                     binding.erEmail.visibility = View.VISIBLE
                     isValidEmail = false
                 }

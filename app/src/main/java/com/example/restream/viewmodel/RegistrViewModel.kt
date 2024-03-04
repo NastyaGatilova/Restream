@@ -1,20 +1,20 @@
-package com.example.restream
+package com.example.restream.viewmodel
 
 import android.annotation.SuppressLint
 import android.app.Application
 import android.util.Log
-import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.restream.R
+import com.example.restream.TAG
 import com.example.restream.databinding.ActivityRegistrationBinding
 import com.example.restream.retrofit.ApiService
-import com.example.restream.retrofit.PostData
+import com.example.restream.retrofit.PostDataSignUp
 import com.example.restream.retrofit.User
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -48,25 +48,22 @@ val apiService = retrofit.create(ApiService::class.java)
 class MainViewModel(application: Application): AndroidViewModel(application) {
 
 
-
-
     private val _response = MutableLiveData<Int>()
     val response: LiveData<Int>
         get() = _response
 
 
-
     fun registrUserRequest(binding: ActivityRegistrationBinding){
-        val user = User(
+        val signUp = User(
             binding.email.text.toString(),
             binding.pass.text.toString(),
             binding.confirmPass.text.toString()
         )
-        val postData = PostData(user, null, null)
+        val postDataSignUp = PostDataSignUp(signUp, null, null)
 
         viewModelScope.launch {
             try {
-               val userResponse = apiService.registrUser(postData)
+               val userResponse = apiService.signUp(postDataSignUp)
 
                 val statusCode = userResponse.code()
 

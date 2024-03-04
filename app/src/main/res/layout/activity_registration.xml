@@ -177,7 +177,8 @@
             android:textAppearance="@style/no_acc_text"
             app:layout_constraintStart_toEndOf="@+id/checkBoxOffer"
             app:layout_constraintTop_toBottomOf="@+id/agreement"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            android:autoLink="web"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/registerbtn"
