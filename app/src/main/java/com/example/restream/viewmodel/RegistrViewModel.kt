@@ -20,9 +20,13 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+
 val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
     override fun log(message: String) {
-        Log.d(TAG, "SERVER_RESPONSE ${message}") // Устанавливаем тег для логирования ответов сервера
+        Log.d(
+            TAG,
+            "SERVER_RESPONSE ${message}"
+        ) // Устанавливаем тег для логирования ответов сервера
     }
 }).apply {
     level = HttpLoggingInterceptor.Level.BODY
@@ -45,7 +49,7 @@ val apiService = retrofit.create(ApiService::class.java)
 
 
 @SuppressLint("SuspiciousIndentation")
-class MainViewModel(application: Application): AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     private val _response = MutableLiveData<Int>()
@@ -53,7 +57,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         get() = _response
 
 
-    fun registrUserRequest(binding: ActivityRegistrationBinding){
+    fun registrUserRequest(binding: ActivityRegistrationBinding) {
         val signUp = User(
             binding.email.text.toString(),
             binding.pass.text.toString(),
@@ -63,15 +67,14 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
 
         viewModelScope.launch {
             try {
-               val userResponse = apiService.signUp(postDataSignUp)
+                val userResponse = apiService.signUp(postDataSignUp)
 
                 val statusCode = userResponse.code()
 
-                 _response.value = statusCode
+                _response.value = statusCode
 
 
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 Log.d(TAG, "Ошибка запроса!!!! ${e.printStackTrace()}")
                 binding.registerbtn.setText(R.string.wait)
                 _response.value = 0
@@ -79,32 +82,10 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
             }
 
 
-
-
-
-
-
         }
 
 
-
-
-
-
-
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+}

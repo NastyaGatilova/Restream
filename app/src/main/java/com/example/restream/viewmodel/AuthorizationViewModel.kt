@@ -15,8 +15,7 @@ import com.example.restream.retrofit.User
 import kotlinx.coroutines.launch
 
 
-
-class AuthorizationViewModel(application: Application): AndroidViewModel(application) {
+class AuthorizationViewModel(application: Application) : AndroidViewModel(application) {
 
 
     val sharedPreferences = application.getSharedPreferences("Cookies", Context.MODE_PRIVATE)
@@ -35,7 +34,7 @@ class AuthorizationViewModel(application: Application): AndroidViewModel(applica
     val cookieManager = CookieManager.getInstance()
 
 
-    fun authUserRequest(binding: ActivityAuthorizationBinding){
+    fun authUserRequest(binding: ActivityAuthorizationBinding) {
         val user = User(
             binding.email.text.toString(),
             binding.pass.text.toString()
@@ -56,6 +55,12 @@ class AuthorizationViewModel(application: Application): AndroidViewModel(applica
                 }
 
 
+
+
+
+
+
+
                 val editor = sharedPreferences.edit()
                 editor.putString("cookies", cookieManager.getCookie("https://app.restream.su"))
                 editor.apply()
@@ -66,8 +71,7 @@ class AuthorizationViewModel(application: Application): AndroidViewModel(applica
 
 
                 _response.value = statusCode
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 Log.d(TAG, "Ошибка запроса авторизации!!!! ${e.printStackTrace()}")
                 _response.value = 0
 
@@ -76,7 +80,7 @@ class AuthorizationViewModel(application: Application): AndroidViewModel(applica
     }
 
 
-    fun checkUser(){
+    fun checkUser() {
 
         val userList = mutableListOf<String>()
 
@@ -86,9 +90,8 @@ class AuthorizationViewModel(application: Application): AndroidViewModel(applica
                 val userResponse = apiService.user(cookie!!)
 
 
-
-                val userEmail=userResponse.user_email
-               val regdate = userResponse.registration_date
+                val userEmail = userResponse.user_email
+                val regdate = userResponse.registration_date
                 val userTariff = userResponse.tariff!!.name
 
                 userList.add(userEmail.toString())
@@ -97,15 +100,14 @@ class AuthorizationViewModel(application: Application): AndroidViewModel(applica
 
                 Log.d(TAG, "userEmail=${userEmail}")
 
-             //   _responseUser.value = userEmail!!
-                userListLiveData.value= userList
+                //   _responseUser.value = userEmail!!
+                userListLiveData.value = userList
 
 
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 Log.d(TAG, "Ошибка запроса проверки USER!!!! ${e.printStackTrace()}")
-               // _responseUser.value = ""
-                userListLiveData.value= listOf("")
+                // _responseUser.value = ""
+                userListLiveData.value = listOf("")
 
             }
 
@@ -114,7 +116,6 @@ class AuthorizationViewModel(application: Application): AndroidViewModel(applica
 
 
     }
-
 
 
 }

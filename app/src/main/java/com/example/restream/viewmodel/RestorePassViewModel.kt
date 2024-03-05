@@ -12,7 +12,7 @@ import com.example.restream.retrofit.PostDataSignIn
 import com.example.restream.retrofit.User
 import kotlinx.coroutines.launch
 
-class RestorePassViewModel(application: Application): AndroidViewModel(application) {
+class RestorePassViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _response = MutableLiveData<Int>()
     val response: LiveData<Int>
@@ -45,5 +45,4 @@ class RestorePassViewModel(application: Application): AndroidViewModel(applicati
     }
 
 
-
-    }
+}

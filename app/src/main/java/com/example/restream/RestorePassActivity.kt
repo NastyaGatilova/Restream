@@ -14,7 +14,7 @@ import com.example.restream.viewmodel.RestorePassViewModel
 
 class RestorePassActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRestorePassBinding
-    val viewModel by lazy { ViewModelProvider(this).get(RestorePassViewModel::class.java)}
+    val viewModel by lazy { ViewModelProvider(this).get(RestorePassViewModel::class.java) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRestorePassBinding.inflate(layoutInflater)
@@ -23,19 +23,17 @@ class RestorePassActivity : AppCompatActivity() {
 
         binding.restoreBtn.setOnClickListener {
 
-            if (checkFormEmail()){
+            if (checkFormEmail()) {
                 viewModel.passwordRequest(binding)
 
                 viewModel.response.observe(this, Observer { response ->
 
-                    if(response == 200) {
+                    if (response == 200) {
 
                         binding.textView.setText(R.string.instructions_sent)
                         binding.restoreBtn.visibility = View.GONE
                         binding.email.visibility = View.GONE
-                    }
-
-                    else {
+                    } else {
 
                         val intent =
                             Intent(this, ErrorActivity::class.java)
@@ -44,36 +42,33 @@ class RestorePassActivity : AppCompatActivity() {
 
 
                 })
-            }
-            else {
+            } else {
                 binding.email.addTextChangedListener {
                     if (binding.email.text.isNotEmpty()) {
-                        binding.erEmail.visibility=View.GONE
+                        binding.erEmail.visibility = View.GONE
                     }
-                } }
-            finish()
+                }
+            }
+
         }
 
-        binding.backBtn.setOnClickListener{
+        binding.backBtn.setOnClickListener {
             val intent =
                 Intent(this, AuthorizationActivity::class.java)
             startActivity(intent)
-          //  finish()
+            finish()
         }
     }
 
 
-
-
-
-
-
-    private fun checkFormEmail():Boolean{
-        if ((binding.email.text!!.isNotEmpty()) && android.util.Patterns.EMAIL_ADDRESS.matcher(binding.email.text!!).matches()){
+    private fun checkFormEmail(): Boolean {
+        if ((binding.email.text!!.isNotEmpty()) && android.util.Patterns.EMAIL_ADDRESS.matcher(
+                binding.email.text!!
+            ).matches()
+        ) {
             binding.erEmail.visibility = View.GONE
             return true
-        }
-        else  binding.erEmail.visibility = View.VISIBLE
+        } else binding.erEmail.visibility = View.VISIBLE
         return false
 
 
