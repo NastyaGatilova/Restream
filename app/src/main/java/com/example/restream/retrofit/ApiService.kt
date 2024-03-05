@@ -17,9 +17,8 @@ interface ApiService {
     @POST("api_auth/sign_in")
    suspend fun signIn(@Body postDataSignIn: PostDataSignIn): Response<ResponseBody>
 
-
     @GET("api/user")
-    suspend fun user(@Header("Cookie") cookie: String): User
+    suspend fun user(): User
 
     @POST("api_auth/password")
     suspend fun postPassword(@Body postDataSignIn: PostDataSignIn): Response<ResponseBody>

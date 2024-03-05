@@ -10,15 +10,56 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.restream.TAG
 import com.example.restream.databinding.ActivityAuthorizationBinding
+import com.example.restream.retrofit.ApiService
 import com.example.restream.retrofit.PostDataSignIn
 import com.example.restream.retrofit.User
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.launch
+import okhttp3.JavaNetCookieJar
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.net.CookiePolicy
 
+val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+    override fun log(message: String) {
+        Log.d(
+            TAG,
+            "SERVER_RESPONSE ${message}"
+        ) // Устанавливаем тег для логирования ответов сервера
+    }
+}).apply {
+    level = HttpLoggingInterceptor.Level.BODY
+}
+
+
+val cookieManager = java.net.CookieManager().apply {
+    setCookiePolicy(CookiePolicy.ACCEPT_ALL)
+}
+
+
+val client = OkHttpClient.Builder()
+    .addInterceptor(loggingInterceptor)
+    .cookieJar(JavaNetCookieJar(cookieManager))
+    .build()
+
+val moshi = Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
+    .build()
+
+val converterFactory = MoshiConverterFactory.create(moshi)
+val retrofit = Retrofit.Builder()
+    .baseUrl("https://app.restream.su/")
+    .client(client)
+    .addConverterFactory(converterFactory)
+    .build()
+val apiService = retrofit.create(ApiService::class.java)
 
 class AuthorizationViewModel(application: Application) : AndroidViewModel(application) {
 
 
-    val sharedPreferences = application.getSharedPreferences("Cookies", Context.MODE_PRIVATE)
 
     private val _response = MutableLiveData<Int>()
     val response: LiveData<Int>
@@ -31,7 +72,6 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
     val userListLiveData = MutableLiveData<List<String>>()
 
 
-    val cookieManager = CookieManager.getInstance()
 
 
     fun authUserRequest(binding: ActivityAuthorizationBinding) {
@@ -41,34 +81,13 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
         )
         val postDataSignIn = PostDataSignIn(user)
 
+
+
         viewModelScope.launch {
             try {
                 val userResponse = apiService.signIn(postDataSignIn)
 
                 val statusCode = userResponse.code()
-
-                val cookies = userResponse.headers().values("Set-Cookie")
-
-
-                for (cookie in cookies) {
-                    cookieManager.setCookie("https://app.restream.su", cookie)
-                }
-
-
-
-
-
-
-
-
-                val editor = sharedPreferences.edit()
-                editor.putString("cookies", cookieManager.getCookie("https://app.restream.su"))
-                editor.apply()
-
-
-
-
-
 
                 _response.value = statusCode
             } catch (e: Exception) {
@@ -86,9 +105,7 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
 
         viewModelScope.launch {
             try {
-                val cookie = sharedPreferences.getString("cookies", "")
-                val userResponse = apiService.user(cookie!!)
-
+                val userResponse = apiService.user()
 
                 val userEmail = userResponse.user_email
                 val regdate = userResponse.registration_date
