@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.restream.TAG
 import com.example.restream.databinding.ActivityRestorePassBinding
 import com.example.restream.retrofit.PostDataSignIn
+import com.example.restream.retrofit.RetrofitClient
 import com.example.restream.retrofit.User
 import kotlinx.coroutines.launch
 
@@ -27,7 +28,7 @@ class RestorePassViewModel(application: Application) : AndroidViewModel(applicat
 
         viewModelScope.launch {
             try {
-                val userResponse = apiService.postPassword(postDataPass)
+                val userResponse = RetrofitClient.apiService.postPassword(postDataPass)
 
                 val statusCode = userResponse.code()
 

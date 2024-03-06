@@ -1,61 +1,19 @@
 package com.example.restream.viewmodel
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
-import android.webkit.CookieManager
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.restream.TAG
 import com.example.restream.databinding.ActivityAuthorizationBinding
-import com.example.restream.retrofit.ApiService
 import com.example.restream.retrofit.PostDataSignIn
+import com.example.restream.retrofit.RetrofitClient
 import com.example.restream.retrofit.User
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.launch
-import okhttp3.JavaNetCookieJar
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.net.CookiePolicy
 
-val loggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-    override fun log(message: String) {
-        Log.d(
-            TAG,
-            "SERVER_RESPONSE ${message}"
-        ) // Устанавливаем тег для логирования ответов сервера
-    }
-}).apply {
-    level = HttpLoggingInterceptor.Level.BODY
-}
-
-
-val cookieManager = java.net.CookieManager().apply {
-    setCookiePolicy(CookiePolicy.ACCEPT_ALL)
-}
-
-
-val client = OkHttpClient.Builder()
-    .addInterceptor(loggingInterceptor)
-    .cookieJar(JavaNetCookieJar(cookieManager))
-    .build()
-
-val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
-
-val converterFactory = MoshiConverterFactory.create(moshi)
-val retrofit = Retrofit.Builder()
-    .baseUrl("https://app.restream.su/")
-    .client(client)
-    .addConverterFactory(converterFactory)
-    .build()
-val apiService = retrofit.create(ApiService::class.java)
 
 class AuthorizationViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -84,10 +42,12 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
 
 
         viewModelScope.launch {
+
             try {
-                val userResponse = apiService.signIn(postDataSignIn)
+                val userResponse = RetrofitClient.apiService.signIn(postDataSignIn)
 
                 val statusCode = userResponse.code()
+
 
                 _response.value = statusCode
             } catch (e: Exception) {
@@ -99,13 +59,14 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
     }
 
 
-    fun checkUser() {
+    fun checkUser(binding: ActivityAuthorizationBinding) {
 
         val userList = mutableListOf<String>()
 
         viewModelScope.launch {
+
             try {
-                val userResponse = apiService.user()
+                val userResponse = RetrofitClient.apiService.user()
 
                 val userEmail = userResponse.user_email
                 val regdate = userResponse.registration_date
@@ -117,19 +78,34 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
 
                 Log.d(TAG, "userEmail=${userEmail}")
 
-                //   _responseUser.value = userEmail!!
                 userListLiveData.value = userList
 
 
             } catch (e: Exception) {
                 Log.d(TAG, "Ошибка запроса проверки USER!!!! ${e.printStackTrace()}")
-                // _responseUser.value = ""
                 userListLiveData.value = listOf("")
 
             }
 
 
+
         }
+
+
+    }
+
+    fun checkFormAuth(binding: ActivityAuthorizationBinding): Boolean {
+        if ((binding.email.text!!.isNotEmpty()) && (binding.pass.text!!.isNotEmpty())) {
+            binding.erPass.visibility = View.GONE
+            binding.erEmail.visibility = View.GONE
+            return true
+        }
+        if ((binding.email.text!!.isEmpty()) && (binding.pass.text!!.isEmpty())) {
+            binding.erPass.visibility = View.VISIBLE
+            binding.erEmail.visibility = View.VISIBLE
+        } else if (binding.pass.text!!.isEmpty()) binding.erPass.visibility = View.VISIBLE
+        else if (binding.email.text!!.isEmpty()) binding.erEmail.visibility = View.VISIBLE
+        return false
 
 
     }

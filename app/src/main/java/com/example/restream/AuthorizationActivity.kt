@@ -12,7 +12,16 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.restream.databinding.ActivityAuthorizationBinding
+import com.example.restream.retrofit.ApiService
 import com.example.restream.viewmodel.AuthorizationViewModel
+import com.squareup.moshi.KotlinJsonAdapterFactory
+import com.squareup.moshi.Moshi
+import okhttp3.JavaNetCookieJar
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import java.net.CookiePolicy
 
 class AuthorizationActivity : AppCompatActivity() {
 
@@ -39,22 +48,27 @@ class AuthorizationActivity : AppCompatActivity() {
 
         binding.comeInBtn.setOnClickListener {
 
-            if (checkFormAuth()) {
+            if (viewModel.checkFormAuth(binding)) {
                 //проверка успешности запроса
+                binding.comeInBtn.setEnabled(false)
                 viewModel.authUserRequest(binding)
                 viewModel.response.observe(this, Observer
                 { response ->
-
+                    binding.comeInBtn.setEnabled(false)
                     if (response == 200) {
-                        viewModel.checkUser()
+                        viewModel.checkUser(binding)
                         viewModel.userListLiveData.observe(this, Observer { responseUser ->
                             //временная проверка вывода данных
+
+
                             val intent = Intent(this, HomeActivity::class.java)
                             intent.putExtra(TAG_USER_EMAIL, responseUser.get(0))
                             intent.putExtra(TAG_USER_DATE, responseUser.get(1))
                             intent.putExtra(TAG_USER_TARIFF, responseUser.get(2))
                             startActivity(intent)
-                            // finish()
+                            binding.email.text.clear()
+                            binding.pass.text!!.clear()
+                            finish()
                         })
                     } else if (response == 401) {
                         binding.erRequest.visibility = View.VISIBLE
@@ -77,37 +91,27 @@ class AuthorizationActivity : AppCompatActivity() {
                 }
             }
 
+
         }
 
 
     }
 
 
-    private fun checkFormAuth(): Boolean {
-        if ((binding.email.text!!.isNotEmpty()) && (binding.pass.text!!.isNotEmpty())) {
-            binding.erPass.visibility = View.GONE
-            binding.erEmail.visibility = View.GONE
-            return true
-        }
-        if ((binding.email.text!!.isEmpty()) && (binding.pass.text!!.isEmpty())) {
-            binding.erPass.visibility = View.VISIBLE
-            binding.erEmail.visibility = View.VISIBLE
-        } else if (binding.pass.text!!.isEmpty()) binding.erPass.visibility = View.VISIBLE
-        else if (binding.email.text!!.isEmpty()) binding.erEmail.visibility = View.VISIBLE
-        return false
 
 
-    }
 
     override fun onResume() {
         super.onResume()
         val originalText = binding.registrBtn.text.toString()
         binding.registrBtn.text = originalText
-        binding.registrBtn.paintFlags =
-            binding.registrBtn.paintFlags and Paint.UNDERLINE_TEXT_FLAG.inv()
+        binding.registrBtn.paintFlags = binding.registrBtn.paintFlags and Paint.UNDERLINE_TEXT_FLAG.inv()
         binding.erRequest.visibility = View.GONE
+    }
 
-
+    override fun onPause() {
+        super.onPause()
+        binding.comeInBtn.setEnabled(true)
     }
 
 
