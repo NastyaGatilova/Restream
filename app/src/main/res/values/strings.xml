@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Restream</string>
+    <integer name="com_vk_sdk_AppId">51875512</integer>
     <string name="email">Электронная почта</string>
     <string name="pass">Пароль</string>
     <string name="restorePass">Восстановить пароль</string>
@@ -39,6 +40,8 @@
     <string name="instructions_sent">Инструкции по восстановлению пароля были отправлены на указанную почту</string>
 
     <string name="wrong_email_or_pass">Неверный Email или пароль.</string>
+
+
 
 
 

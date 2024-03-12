@@ -16,6 +16,10 @@ import com.example.restream.retrofit.ApiService
 import com.example.restream.viewmodel.AuthorizationViewModel
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
+import com.vk.api.sdk.VK
+import com.vk.api.sdk.auth.VKAuthenticationResult
+import com.vk.api.sdk.auth.VKScope
+import com.vk.api.sdk.utils.VKUtils
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,6 +37,8 @@ class AuthorizationActivity : AppCompatActivity() {
         binding = ActivityAuthorizationBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        VK.initialize(applicationContext)
+
 
         binding.registrBtn.setOnClickListener {
             binding.registrBtn.paintFlags =
@@ -92,6 +98,33 @@ class AuthorizationActivity : AppCompatActivity() {
             }
 
 
+        }
+
+        //Для получения SHA
+        //val fingerprints: Array<String?>? = VKUtils.getCertificateFingerprint(this, this.packageName)
+        //Log.d("--fingerprints--", "${fingerprints!![0]}")
+
+        //регистрация через соц сети
+        val authLauncher = VK.login(this) { result : VKAuthenticationResult ->
+            when (result) {
+                is VKAuthenticationResult.Success -> {
+                    Log.d(TAG,"Успех")
+                    Log.d(TAG, "AccessToken =${result.token.accessToken}")
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+
+
+
+                }
+                is VKAuthenticationResult.Failed -> {
+                    Log.d(TAG,"Неудача")
+                    val intent = Intent(this, ErrorActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
+        binding.vk.setOnClickListener {
+            authLauncher.launch(arrayListOf(VKScope.OFFLINE))
         }
 
 

@@ -30,7 +30,7 @@ object RetrofitClient {
     }
 
 
-   private val client = OkHttpClient.Builder()
+    private val client = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .cookieJar(JavaNetCookieJar(cookieManager))
         .build()
