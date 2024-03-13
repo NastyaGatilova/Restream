@@ -130,9 +130,23 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
 
 
 
+    fun authVk(result: VKAuthenticationResult):Boolean{
+        when (result) {
+            is VKAuthenticationResult.Success -> {
+                Log.d(TAG,"Успех")
+                Log.d(TAG, "AccessToken =${result.token.accessToken}")
+
+                return true
 
 
-     //   authLauncher.launch(arrayListOf(VKScope.OFFLINE))
+            }
+            is VKAuthenticationResult.Failed -> {
+                Log.d(TAG,"Неудача")
+               return false
+            }
+        }
+    }
+
 
 
 

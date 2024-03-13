@@ -100,27 +100,35 @@ class AuthorizationActivity : AppCompatActivity() {
 
         }
 
-        //Для получения SHA
-        //val fingerprints: Array<String?>? = VKUtils.getCertificateFingerprint(this, this.packageName)
-        //Log.d("--fingerprints--", "${fingerprints!![0]}")
+       // Для получения SHA
+     //   val fingerprints: Array<String?>? = VKUtils.getCertificateFingerprint(this, this.packageName)
+        // Log.d("--fingerprints--", "${fingerprints!![0]}")
 
         //регистрация через соц сети
         val authLauncher = VK.login(this) { result : VKAuthenticationResult ->
-            when (result) {
-                is VKAuthenticationResult.Success -> {
-                    Log.d(TAG,"Успех")
-                    Log.d(TAG, "AccessToken =${result.token.accessToken}")
-                    val intent = Intent(this, HomeActivity::class.java)
-                    startActivity(intent)
-
-
-
-                }
-                is VKAuthenticationResult.Failed -> {
-                    Log.d(TAG,"Неудача")
-                    val intent = Intent(this, ErrorActivity::class.java)
-                    startActivity(intent)
-                }
+//            when (result) {
+//                is VKAuthenticationResult.Success -> {
+//                    Log.d(TAG,"Успех")
+//                    Log.d(TAG, "AccessToken =${result.token.accessToken}")
+//                    val intent = Intent(this, HomeActivity::class.java)
+//                    startActivity(intent)
+//
+//
+//
+//                }
+//                is VKAuthenticationResult.Failed -> {
+//                    Log.d(TAG,"Неудача")
+//                    val intent = Intent(this, ErrorActivity::class.java)
+//                    startActivity(intent)
+//                }
+//            }
+           if(viewModel.authVk(result)){
+               val intent = Intent(this, HomeActivity::class.java)
+               startActivity(intent)
+           }
+            else {
+               val intent = Intent(this, ErrorActivity::class.java)
+               startActivity(intent)
             }
         }
         binding.vk.setOnClickListener {
