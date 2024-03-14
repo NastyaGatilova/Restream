@@ -20,10 +20,8 @@ class RestorePassViewModel(application: Application) : AndroidViewModel(applicat
         get() = _response
 
 
-    fun passwordRequest(binding: ActivityRestorePassBinding) {
-        val pass = User(
-            binding.email.text.toString()
-        )
+    fun passwordRequest(email:String) {
+        val pass = User(email)
         val postDataPass = PostDataSignIn(pass)
 
         viewModelScope.launch {

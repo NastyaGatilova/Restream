@@ -54,15 +54,18 @@ class AuthorizationActivity : AppCompatActivity() {
 
         binding.comeInBtn.setOnClickListener {
 
-            if (viewModel.checkFormAuth(binding)) {
+            if (viewModel.checkFormAuth(binding.email.text.toString(),
+                    binding.pass.text.toString())) {
+                binding.erPass.visibility = View.GONE
+                binding.erEmail.visibility = View.GONE
                 //проверка успешности запроса
                 binding.comeInBtn.setEnabled(false)
-                viewModel.authUserRequest(binding)
+                viewModel.authUserRequest(binding.email.text.toString(), binding.pass.text.toString())
                 viewModel.response.observe(this, Observer
                 { response ->
                     binding.comeInBtn.setEnabled(false)
                     if (response == 200) {
-                        viewModel.checkUser(binding)
+                        viewModel.checkUser()
                         viewModel.userListLiveData.observe(this, Observer { responseUser ->
                             //временная проверка вывода данных
 
@@ -85,6 +88,19 @@ class AuthorizationActivity : AppCompatActivity() {
                 })
 
             } else {
+                if ((binding.email.text!!.isEmpty()) && (binding.pass.text!!.isEmpty()))
+                {
+                   binding.erPass.visibility = View.VISIBLE
+                   binding.erEmail.visibility = View.VISIBLE
+
+                }else if (binding.pass.text!!.isEmpty())
+
+                    binding.erPass.visibility = View.VISIBLE
+
+                else if (binding.email.text!!.isEmpty())
+
+                    binding.erEmail.visibility = View.VISIBLE
+
                 binding.email.addTextChangedListener {
                     if (binding.email.text.isNotEmpty()) {
                         binding.erEmail.visibility = View.GONE

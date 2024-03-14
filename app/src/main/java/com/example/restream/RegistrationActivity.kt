@@ -49,8 +49,9 @@ class RegistrationActivity : AppCompatActivity() {
             }
 
             if (checkBoxFlag) {
-                if (viewModel.checkAllFormRegistartion(binding)) {
-                    viewModel.registrUserRequest(binding)
+                if (viewModel.checkAllFormRegistartion(binding.email.text.toString(), binding.pass.text.toString(), binding.confirmPass.text.toString()))
+                {
+                    viewModel.registrUserRequest(binding.email.text.toString(), binding.pass.text.toString(), binding.confirmPass.text.toString())
 
                     viewModel.response.observe(this, Observer { response ->
                         if (response == 422) Toast.makeText(
@@ -74,6 +75,15 @@ class RegistrationActivity : AppCompatActivity() {
 
                     })
 
+                }
+                else {
+                    if ((binding.pass.text!!.isEmpty()) && (binding.confirmPass.text!!.isEmpty()) && (binding.email.text!!.isEmpty())) {
+                        binding.erPass.visibility = View.VISIBLE
+                        binding.erConfPass.visibility = View.VISIBLE
+                        binding.erEmail.visibility = View.VISIBLE
+                    } else if (binding.pass.text!!.isEmpty()) binding.erPass.visibility = View.VISIBLE
+                        else if (binding.confirmPass.text!!.isEmpty()) binding.erConfPass.visibility = View.VISIBLE
+                        else if (binding.email.text!!.isEmpty()) binding.erEmail.visibility = View.VISIBLE
                 }
 
             }

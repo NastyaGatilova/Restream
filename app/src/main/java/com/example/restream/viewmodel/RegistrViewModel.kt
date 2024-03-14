@@ -30,12 +30,8 @@ class RegistrViewModel(application: Application) : AndroidViewModel(application)
         get() = _response
 
 
-    fun registrUserRequest(binding: ActivityRegistrationBinding) {
-        val signUp = User(
-            binding.email.text.toString(),
-            binding.pass.text.toString(),
-            binding.confirmPass.text.toString()
-        )
+    fun registrUserRequest(email:String,pass:String,confirmPass:String) {
+        val signUp = User(email,pass, confirmPass)
         val postDataSignUp = PostDataSignUp(signUp, null, null)
 
         viewModelScope.launch {
@@ -49,7 +45,7 @@ class RegistrViewModel(application: Application) : AndroidViewModel(application)
 
             } catch (e: Exception) {
                 Log.d(TAG, "Ошибка запроса!!!! ${e.printStackTrace()}")
-                binding.registerbtn.setText(R.string.wait)
+//                binding.registerbtn.setText(R.string.wait)
                 _response.value = 0
 
             }
@@ -58,17 +54,17 @@ class RegistrViewModel(application: Application) : AndroidViewModel(application)
 
     }
 
-    fun checkAllFormRegistartion(binding: ActivityRegistrationBinding): Boolean {
-        if ((isValidPass) && (isValidConfirmPass) && (isValidEmail) && (binding.pass.text!!.isNotEmpty()) && (binding.email.text!!.isNotEmpty()) && (binding.confirmPass.text!!.isNotEmpty())) {
+    fun checkAllFormRegistartion( email: String, pass: String,confirmPass: String): Boolean {
+        if ((isValidPass) && (isValidConfirmPass) && (isValidEmail) && (pass.isNotEmpty()) && (email.isNotEmpty()) && (confirmPass.isNotEmpty())) {
             return true
         }
-        if ((binding.pass.text!!.isEmpty()) && (binding.confirmPass.text!!.isEmpty()) && (binding.email.text!!.isEmpty())) {
-            binding.erPass.visibility = View.VISIBLE
-            binding.erConfPass.visibility = View.VISIBLE
-            binding.erEmail.visibility = View.VISIBLE
-        } else if (binding.pass.text!!.isEmpty()) binding.erPass.visibility = View.VISIBLE
-        else if (binding.confirmPass.text!!.isEmpty()) binding.erConfPass.visibility = View.VISIBLE
-        else if (binding.email.text!!.isEmpty()) binding.erEmail.visibility = View.VISIBLE
+//        if ((binding.pass.text!!.isEmpty()) && (binding.confirmPass.text!!.isEmpty()) && (binding.email.text!!.isEmpty())) {
+//            binding.erPass.visibility = View.VISIBLE
+//            binding.erConfPass.visibility = View.VISIBLE
+//            binding.erEmail.visibility = View.VISIBLE
+//        } else if (binding.pass.text!!.isEmpty()) binding.erPass.visibility = View.VISIBLE
+//        else if (binding.confirmPass.text!!.isEmpty()) binding.erConfPass.visibility = View.VISIBLE
+//        else if (binding.email.text!!.isEmpty()) binding.erEmail.visibility = View.VISIBLE
         return false
     }
 

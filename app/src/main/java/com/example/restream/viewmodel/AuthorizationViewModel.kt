@@ -15,7 +15,6 @@ import com.example.restream.AuthorizationActivity
 import com.example.restream.ErrorActivity
 import com.example.restream.HomeActivity
 import com.example.restream.TAG
-import com.example.restream.databinding.ActivityAuthorizationBinding
 import com.example.restream.retrofit.PostDataSignIn
 import com.example.restream.retrofit.RetrofitClient
 import com.example.restream.retrofit.User
@@ -50,11 +49,8 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
 
 
 
-    fun authUserRequest(binding: ActivityAuthorizationBinding) {
-        val user = User(
-            binding.email.text.toString(),
-            binding.pass.text.toString()
-        )
+    fun authUserRequest(email: String, pass: String) {
+        val user = User(email, pass)
         val postDataSignIn = PostDataSignIn(user)
 
 
@@ -77,7 +73,7 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
     }
 
 
-    fun checkUser(binding: ActivityAuthorizationBinding) {
+    fun checkUser() {
 
         val userList = mutableListOf<String>()
 
@@ -106,23 +102,23 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
             }
 
 
-
         }
-
 
     }
 
-    fun checkFormAuth(binding: ActivityAuthorizationBinding): Boolean {
-        if ((binding.email.text!!.isNotEmpty()) && (binding.pass.text!!.isNotEmpty())) {
-            binding.erPass.visibility = View.GONE
-            binding.erEmail.visibility = View.GONE
+    fun checkFormAuth(email:String, pass:String): Boolean {
+        if ((email.isNotEmpty()) && (pass.isNotEmpty())) {
+//            binding.erPass.visibility = View.GONE
+//            binding.erEmail.visibility = View.GONE
             return true
         }
-        if ((binding.email.text!!.isEmpty()) && (binding.pass.text!!.isEmpty())) {
-            binding.erPass.visibility = View.VISIBLE
-            binding.erEmail.visibility = View.VISIBLE
-        } else if (binding.pass.text!!.isEmpty()) binding.erPass.visibility = View.VISIBLE
-        else if (binding.email.text!!.isEmpty()) binding.erEmail.visibility = View.VISIBLE
+//        if ((email.isEmpty()) && (pass.isEmpty())) {
+//           binding.erPass.visibility = View.VISIBLE
+//           binding.erEmail.visibility = View.VISIBLE
+//            return false
+//        } else if (pass.isEmpty())
+//            binding.erPass.visibility = View.VISIBLE
+//        else if (email.isEmpty()) binding.erEmail.visibility = View.VISIBLE
         return false
 
 

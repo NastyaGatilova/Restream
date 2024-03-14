@@ -24,7 +24,7 @@ class RestorePassActivity : AppCompatActivity() {
         binding.restoreBtn.setOnClickListener {
 
             if (checkFormEmail()) {
-                viewModel.passwordRequest(binding)
+                viewModel.passwordRequest(binding.email.text.toString())
 
                 viewModel.response.observe(this, Observer { response ->
 
