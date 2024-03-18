@@ -1,28 +1,18 @@
 package com.example.restream.viewmodel
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Application
-import android.content.Intent
 import android.util.Log
-import android.view.View
-import androidx.activity.ComponentActivity
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.restream.AuthorizationActivity
-import com.example.restream.ErrorActivity
-import com.example.restream.HomeActivity
 import com.example.restream.TAG
 import com.example.restream.retrofit.PostDataSignIn
 import com.example.restream.retrofit.RetrofitClient
 import com.example.restream.retrofit.User
-import com.vk.api.sdk.VK
 import com.vk.api.sdk.auth.VKAuthenticationResult
-import com.vk.api.sdk.auth.VKScope
 import kotlinx.coroutines.launch
-
 
 
 @Suppress("INFERRED_TYPE_VARIABLE_INTO_EMPTY_INTERSECTION_WARNING")
@@ -39,10 +29,9 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
         get() = _responseUser
 
     val userListLiveData = MutableLiveData<List<String>>()
-   // @SuppressLint("StaticFieldLeak")
-    //private val authActivity: AuthorizationActivity = application.applicationContext as AuthorizationActivity
+
    @SuppressLint("StaticFieldLeak")
-   //private var activity: AuthorizationActivity? = null
+
 
 
 
@@ -126,11 +115,13 @@ class AuthorizationViewModel(application: Application) : AndroidViewModel(applic
 
 
 
-    fun authVk(result: VKAuthenticationResult):Boolean{
+     fun authVk(result: VKAuthenticationResult):Boolean{
         when (result) {
             is VKAuthenticationResult.Success -> {
                 Log.d(TAG,"Успех")
+
                 Log.d(TAG, "AccessToken =${result.token.accessToken}")
+                Log.d(TAG, "email =${result.token.email}")
 
                 return true
 

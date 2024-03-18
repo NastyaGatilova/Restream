@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Restream</string>
-    <integer name="com_vk_sdk_AppId">51875512</integer>
+    <!--    <integer name="com_vk_sdk_AppId">51875512</integer>-->
+    <integer name="com_vk_sdk_AppId">3856165</integer>
     <string name="email">Электронная почта</string>
     <string name="pass">Пароль</string>
     <string name="restorePass">Восстановить пароль</string>
@@ -41,13 +42,32 @@
 
     <string name="wrong_email_or_pass">Неверный Email или пароль.</string>
 
+    <string name="register_or_login">Зарегистрируйтесь или войдите снова!</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="plan_broadcast">Запланировать эфир</string>
 
+    <string name="hello">Привет, рестример!</string>
+    <string name="read">Прочти</string>
+    <string name="instructions"><u>инструкцию</u></string>
+    <string name="begin_work">по началу работы</string>
+    <string name="with_сab">с кабинетом</string>
+    <string name="tariff_plan">Тарифный план</string>
+    <string name="days_until_subscription">Дней до окончания подписки</string>
+    <string name="home">Главная</string>
 
+    <string name="begin_broadcast">Начните эфир сейчас</string>
+    <string name="in_broadcast">В ЭФИР!</string>
+    <string name="name_broadcast">Название эфира</string>
+    <string name="my_tariff">Мой тариф</string>
+    <string name="broadcasts">Эфиры</string>
 
-
-
-
+    <string name="view_archive">Смотреть архив</string>
+    <string name="add_broadcast">Создать эфир</string>
+    <string name="name">Название</string>
+    <string name="date">Дата</string>
+    <string name="time_begin">Время начала</string>
+    <string name="actions">Действия</string>
 
 </resources>

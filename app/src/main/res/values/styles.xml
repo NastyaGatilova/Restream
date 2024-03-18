@@ -55,6 +55,58 @@
         <item name="android:fontFamily">@font/mulishregular</item>
     </style>
 
+    <style name="plan_broadcast">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/grey2</item>
+        <item name="android:fontFamily">@font/mulishbold</item>
+    </style>
+
+    <style name="hello">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:fontFamily">@font/mulishbold</item>
+    </style>
+
+    <style name="read_instr">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:fontFamily">@font/mulishregular</item>
+    </style>
+
+    <style name="tariff_plan">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/mulishsemibold</item>
+    </style>
+
+    <style name="begin_broadcast">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/mulishbold</item>
+    </style>
+
+    <style name="bottom_nav_icon">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:fontFamily">@font/mulishregular</item>
+    </style>
+
+    <style name="view_archive">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/mulishregular</item>
+    </style>
+
+    <style name="name">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:fontFamily">@font/mulishbold</item>
+    </style>
+
+
+
+
+
 
 
 

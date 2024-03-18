@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Broadcasts">
+
+    <TextView
+        android:id="@+id/viewArchive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_archive"
+        android:textAppearance="@style/view_archive"
+        android:layout_marginStart="30dp"
+      />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addBroadcast"
+        android:layout_width="347dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/default_button_selector"
+        android:enabled="true"
+        android:textSize="24sp"
+        android:text="@string/add_broadcast"
+        android:layout_gravity="center|top"
+        android:textAppearance="@style/come_in" />
+
+    <TextView
+        android:layout_width="347dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="110dp"
+        android:layout_marginBottom="2dp"
+        android:layout_gravity="center|top"
+        android:background="@drawable/schedule_broadcast"
+        android:clickable="true"
+        android:drawableStart="@drawable/clock_rectangle"
+        android:gravity="center"
+        android:paddingStart="55dp"
+        android:paddingEnd="55dp"
+        android:text="@string/plan_broadcast"
+        android:textAppearance="@style/plan_broadcast" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="190dp"
+        android:text="@string/name"
+        android:textAppearance="@style/name" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:textAppearance="@style/name"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="190dp"
+        />
+    <TextView
+        android:id="@+id/time_begin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_begin"
+        android:textAppearance="@style/name"
+        android:layout_marginStart="175dp"
+        android:layout_marginTop="190dp"
+        />
+    <TextView
+        android:id="@+id/actions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/actions"
+        android:textAppearance="@style/name"
+        android:layout_marginStart="302dp"
+        android:layout_marginTop="190dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:layout_gravity="center|top"
+        />
+
+
+</FrameLayout>

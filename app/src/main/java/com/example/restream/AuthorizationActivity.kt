@@ -1,7 +1,6 @@
 package com.example.restream
 
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
@@ -12,20 +11,10 @@ import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.restream.databinding.ActivityAuthorizationBinding
-import com.example.restream.retrofit.ApiService
 import com.example.restream.viewmodel.AuthorizationViewModel
-import com.squareup.moshi.KotlinJsonAdapterFactory
-import com.squareup.moshi.Moshi
 import com.vk.api.sdk.VK
 import com.vk.api.sdk.auth.VKAuthenticationResult
 import com.vk.api.sdk.auth.VKScope
-import com.vk.api.sdk.utils.VKUtils
-import okhttp3.JavaNetCookieJar
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.net.CookiePolicy
 
 class AuthorizationActivity : AppCompatActivity() {
 
@@ -70,11 +59,13 @@ class AuthorizationActivity : AppCompatActivity() {
                             //временная проверка вывода данных
 
 
-                            val intent = Intent(this, HomeActivity::class.java)
-                            intent.putExtra(TAG_USER_EMAIL, responseUser.get(0))
-                            intent.putExtra(TAG_USER_DATE, responseUser.get(1))
-                            intent.putExtra(TAG_USER_TARIFF, responseUser.get(2))
-                            startActivity(intent)
+                    //      val intent = Intent(this, HomeActivity::class.java)
+                   //         intent.putExtra(TAG_USER_EMAIL, responseUser.get(0))
+//                            intent.putExtra(TAG_USER_DATE, responseUser.get(1))
+//                            intent.putExtra(TAG_USER_TARIFF, responseUser.get(2))
+                      //      startActivity(intent)
+
+
                             binding.email.text.clear()
                             binding.pass.text!!.clear()
                             finish()
@@ -122,33 +113,26 @@ class AuthorizationActivity : AppCompatActivity() {
 
         //регистрация через соц сети
         val authLauncher = VK.login(this) { result : VKAuthenticationResult ->
-//            when (result) {
-//                is VKAuthenticationResult.Success -> {
-//                    Log.d(TAG,"Успех")
-//                    Log.d(TAG, "AccessToken =${result.token.accessToken}")
-//                    val intent = Intent(this, HomeActivity::class.java)
-//                    startActivity(intent)
-//
-//
-//
-//                }
-//                is VKAuthenticationResult.Failed -> {
-//                    Log.d(TAG,"Неудача")
-//                    val intent = Intent(this, ErrorActivity::class.java)
-//                    startActivity(intent)
-//                }
-//            }
-           if(viewModel.authVk(result)){
-               val intent = Intent(this, HomeActivity::class.java)
-               startActivity(intent)
-           }
-            else {
-               val intent = Intent(this, ErrorActivity::class.java)
-               startActivity(intent)
-            }
+
+
+                if(viewModel.authVk(result)){
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                }
+                else {
+                   Toast.makeText(this, R.string.register_or_login, Toast.LENGTH_SHORT).show()
+
+                }
+
+
         }
         binding.vk.setOnClickListener {
-            authLauncher.launch(arrayListOf(VKScope.OFFLINE))
+            authLauncher.launch(arrayListOf(VKScope.OFFLINE, VKScope.EMAIL))
+        }
+
+        binding.twitch.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
         }
 
 
